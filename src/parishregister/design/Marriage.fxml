@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parishregister.MarriageController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="598.0" prefWidth="324.0" spacing="5.0">
+               <children>
+                  <Label text="Marriage Details">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Bride's Full Name" />
+                  <TextField fx:id="txtBrideName" prefHeight="35.0" promptText="Bride's Full Name" />
+                  <Label layoutX="10.0" layoutY="27.0" text="Groom's Full Name" />
+                  <TextField fx:id="txtGroomName" layoutX="10.0" layoutY="44.0" prefHeight="35.0" promptText="Groom's Full Name" />
+                  <Label layoutX="10.0" layoutY="69.0" text="Place" />
+                  <TextField fx:id="txtPlace" layoutX="10.0" layoutY="86.0" prefHeight="35.0" promptText="Place" />
+                  <Label layoutX="10.0" layoutY="111.0" text="Married Date" />
+                  <DatePicker fx:id="dtpMarriedDate" prefHeight="35.0" prefWidth="310.0" promptText="Married Date" />
+                  <Label layoutX="10.0" layoutY="153.0" text="Witness 1" />
+                  <TextField fx:id="txtWitness1" layoutX="10.0" layoutY="170.0" prefHeight="35.0" promptText="Witness 1" />
+                  <Label layoutX="10.0" layoutY="195.0" text="Witness 2" />
+                  <TextField fx:id="txtWitness2" layoutX="10.0" layoutY="212.0" prefHeight="35.0" promptText="Witness 2" />
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveDetails" prefWidth="80.0" text="Save">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnClear" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#clearDetails" prefWidth="80.0" text="Clear">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnDashboard" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDashboard" prefWidth="80.0" text="Dashboard">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView fx:id="tblDisplay" layoutX="1.0" layoutY="-1.0" prefHeight="598.0" prefWidth="768.0">
+              <columns>
+                <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colBridesName" prefWidth="105.0" text="Bride's Name" />
+                  <TableColumn fx:id="colGroomsName" prefWidth="111.0" text="Groom's Name" />
+                  <TableColumn fx:id="colPlace" prefWidth="111.0" text="Place" />
+                  <TableColumn fx:id="colMarried" prefWidth="111.0" text="Married Date" />
+                  <TableColumn fx:id="colWitness1" prefWidth="111.0" text="Witness 1" />
+                  <TableColumn fx:id="colWitness2" prefWidth="143.0" text="Witness 2" />
+              </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
