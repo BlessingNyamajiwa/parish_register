@@ -2,7 +2,13 @@ package parishregister;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +22,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import static parishregister.GenericMethods.warningBox;
 
 /**
  * FXML Controller class
@@ -39,13 +47,13 @@ public class MembershipController implements Initializable
     @FXML
     private RadioButton rdbBaptisedYes;
     @FXML
-    private ToggleGroup Baptised;
+    private ToggleGroup baptised;
     @FXML
     private RadioButton rdbBaptiseddNo;
     @FXML
     private RadioButton rdbMarriedYes;
     @FXML
-    private ToggleGroup Married;
+    private ToggleGroup married;
     @FXML
     private RadioButton rdbMarriedNo;
     @FXML
@@ -57,25 +65,27 @@ public class MembershipController implements Initializable
     @FXML
     private Button btnDashboard;
     @FXML
-    private TableView<?> tblDisplay;
+    private TableView<Membership> tblDisplay;
     @FXML
     private TableColumn<?, ?> colID;
     @FXML
-    private TableColumn<?, ?> colDiocese;
+    private TableColumn<Membership, String> colDiocese;
     @FXML
-    private TableColumn<?, ?> colParish;
+    private TableColumn<Membership, String> colParish;
     @FXML
-    private TableColumn<?, ?> colPlace;
+    private TableColumn<Membership, String> colPlace;
     @FXML
-    private TableColumn<?, ?> colHome;
+    private TableColumn<Membership, String> colHome;
     @FXML
-    private TableColumn<?, ?> colSpouse;
+    private TableColumn<Membership, String> colSpouse;
     @FXML
-    private TableColumn<?, ?> colBaptised;
+    private TableColumn<Membership, String> colBaptised;
     @FXML
-    private TableColumn<?, ?> colMarried;
+    private TableColumn<Membership, String> colMarried;
     @FXML
-    private TableColumn<?, ?> colChildren;
+    private TableColumn<Membership, Integer> colChildren;
+    
+    // private ObservableList data;
     
     private Parent root;
     private Stage stage;
@@ -85,20 +95,34 @@ public class MembershipController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        loadTableData();
     }    
 
     @FXML
     private void saveDetails(ActionEvent event) 
     {
-        
+        if(txtDiocese.getText().equals("") || txtParish.getText().equals("") || txtPlace.getText().equals("") || txtHome.getText().equals("") || 
+                txtSpouse.getText().equals("") || baptised.getSelectedToggle().equals(false) || married.getSelectedToggle().equals(false) ||
+                txtChildren.getText().equals(""))
+        {
+            warningBox("Please fill in all fields","WARNING","Incomplete fields");
+        }
+        else
+        {
+            Connection conn = DBConnection.getConnection();
+        }
     }
 
     @FXML
     private void clearDetails(ActionEvent event) 
     {
-        
+        txtDiocese.setText("");
+        txtParish.setText("");
+        txtPlace.setText("");
+        txtHome.setText("");
+        txtChildren.setText("");
     }
 
     @FXML
@@ -115,4 +139,39 @@ public class MembershipController implements Initializable
         stage.show();
     }
     
+    private void loadTableData()
+    {
+        Connection conn = DBConnection.getConnection();
+        ObservableList<Membership> list = FXCollections.observableArrayList();
+        
+        // Setting cell value factories to populate table with database query result set
+        colDiocese.setCellValueFactory(new PropertyValueFactory<>("colDiocese"));
+        colParish.setCellValueFactory(new PropertyValueFactory<>("colParish"));
+        colPlace.setCellValueFactory(new PropertyValueFactory<>("colPlace"));
+        colHome.setCellValueFactory(new PropertyValueFactory<>("colHome"));
+        colSpouse.setCellValueFactory(new PropertyValueFactory<>("colSpouse"));
+        colBaptised.setCellValueFactory(new PropertyValueFactory<>("colBaptised"));
+        colMarried.setCellValueFactory(new PropertyValueFactory<>("colMarried"));
+        colChildren.setCellValueFactory(new PropertyValueFactory<>("colChildren"));
+        
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM membership");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                list.add(new Membership(rs.getInt("id"), rs.getString("diocese"), rs.getString("parish"), rs.getString("place"), rs.getString("home"),
+                rs.getString("spouse"), rs.getString("baptised"), rs.getString("married"), rs.getInt("children")));
+            }
+            
+            // Setting table data
+            tblDisplay.setItems(list);
+            conn.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
