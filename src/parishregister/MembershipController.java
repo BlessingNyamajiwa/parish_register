@@ -67,7 +67,7 @@ public class MembershipController implements Initializable
     @FXML
     private TableView<Membership> tblDisplay;
     @FXML
-    private TableColumn<?, ?> colID;
+    private TableColumn<Membership, Integer> colID;
     @FXML
     private TableColumn<Membership, String> colDiocese;
     @FXML

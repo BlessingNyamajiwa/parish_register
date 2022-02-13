@@ -43,8 +43,9 @@ public class ParishRegisterLoginController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        // Connection conn = DBConnection.getConnection();
-    }    
+        // checkConnection();
+    }
+
 
     @FXML
     private void login(ActionEvent signin) throws IOException
@@ -85,6 +86,7 @@ public class ParishRegisterLoginController implements Initializable
                 {
                     errorBox("User not found. Please verify your login credentials", "ERROR", "Login failure");
                 }
+                conn.close();
             }
             catch(SQLException e)
             {
