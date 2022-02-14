@@ -163,7 +163,7 @@ public class MembershipController implements Initializable
             while(rs.next())
             {
                 list.add(new Membership(rs.getInt("id"), rs.getString("diocese"), rs.getString("parish"), rs.getString("place"), rs.getString("home"),
-                rs.getString("spouse"), rs.getString("baptised"), rs.getString("married"), rs.getInt("")));
+                rs.getString("spouse"), rs.getString("baptised"), rs.getString("married"), rs.getInt("children")));
             }
             
             // Setting table data

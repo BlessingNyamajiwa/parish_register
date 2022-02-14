@@ -3,6 +3,7 @@ package parishregister;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import static parishregister.GenericMethods.errorBox;
+import static parishregister.GenericMethods.infoBox;
 
 public class ParishRegisterLoginController implements Initializable 
 {   
@@ -40,10 +42,42 @@ public class ParishRegisterLoginController implements Initializable
     private Stage stage;
     private Scene scene;
     
+    
+    private static Connection conn;
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/parish_register";
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        
+        boolean status = createConnection();
+        if(status)
+        {
+            infoBox("Database connection created successfully", "INFORMATION", "Connection Status");
+        }
+        else
+        {
+            errorBox("Failed to create database connection","ERROR","Database Connection Failed");
+            System.exit(0);
+        }
+    }
+    
+    public boolean createConnection(){
+        try{
+            conn = DriverManager.getConnection(DB_URL,"root","");
+            
+            if(conn != null){
+                return true;
+            }
+            else{
+//                errorBox("Failed to create database connection","ERROR","Database Connection Failed");
+                return false;
+            }
+            
+        }
+        catch(Exception ex){
+//            errorBox("Failed to create database connection","ERROR","Database Connection Failed");
+            return false;
+        }
     }
 
 
