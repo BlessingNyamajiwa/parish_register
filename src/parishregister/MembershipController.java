@@ -128,7 +128,7 @@ public class MembershipController implements Initializable
     @FXML
     private void backToDash(ActionEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/ParishRegisterLogin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/Dashboard.fxml"));
         root = loader.load();
         
         // LoginController loginController = loader.getController();
@@ -145,14 +145,15 @@ public class MembershipController implements Initializable
         ObservableList<Membership> list = FXCollections.observableArrayList();
         
         // Setting cell value factories to populate table with database query result set
-        colDiocese.setCellValueFactory(new PropertyValueFactory<>("colDiocese"));
-        colParish.setCellValueFactory(new PropertyValueFactory<>("colParish"));
-        colPlace.setCellValueFactory(new PropertyValueFactory<>("colPlace"));
-        colHome.setCellValueFactory(new PropertyValueFactory<>("colHome"));
-        colSpouse.setCellValueFactory(new PropertyValueFactory<>("colSpouse"));
-        colBaptised.setCellValueFactory(new PropertyValueFactory<>("colBaptised"));
-        colMarried.setCellValueFactory(new PropertyValueFactory<>("colMarried"));
-        colChildren.setCellValueFactory(new PropertyValueFactory<>("colChildren"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDiocese.setCellValueFactory(new PropertyValueFactory<>("diocese"));
+        colParish.setCellValueFactory(new PropertyValueFactory<>("parish"));
+        colPlace.setCellValueFactory(new PropertyValueFactory<>("place"));
+        colHome.setCellValueFactory(new PropertyValueFactory<>("home"));
+        colSpouse.setCellValueFactory(new PropertyValueFactory<>("spouse"));
+        colBaptised.setCellValueFactory(new PropertyValueFactory<>("baptised"));
+        colMarried.setCellValueFactory(new PropertyValueFactory<>("married"));
+        colChildren.setCellValueFactory(new PropertyValueFactory<>("children"));
         
         try
         {
@@ -162,7 +163,7 @@ public class MembershipController implements Initializable
             while(rs.next())
             {
                 list.add(new Membership(rs.getInt("id"), rs.getString("diocese"), rs.getString("parish"), rs.getString("place"), rs.getString("home"),
-                rs.getString("spouse"), rs.getString("baptised"), rs.getString("married"), rs.getInt("children")));
+                rs.getString("spouse"), rs.getString("baptised"), rs.getString("married"), rs.getInt("")));
             }
             
             // Setting table data

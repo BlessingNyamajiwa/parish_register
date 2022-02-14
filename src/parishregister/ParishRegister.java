@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import static parishregister.DBConnection.infoBox;
 import static parishregister.GenericMethods.errorBox;
+import static parishregister.GenericMethods.infoBox;
 
 public class ParishRegister extends Application 
 {
@@ -28,8 +28,7 @@ public class ParishRegister extends Application
     }
     
     private void checkConnection()
-    {
-        
+    {    
         try
         {
             Connection conn = DBConnection.getConnection();
