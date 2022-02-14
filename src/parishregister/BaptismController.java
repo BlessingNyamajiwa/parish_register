@@ -3,7 +3,12 @@ package parishregister;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,15 +21,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Munyaradzi Nyamajiwa
- */
-public class BaptismController implements Initializable {
 
+public class BaptismController implements Initializable 
+{
     @FXML
     private TextField txtFullName;
     @FXML
@@ -36,31 +38,85 @@ public class BaptismController implements Initializable {
     @FXML
     private Button btnDashboard;
     @FXML
-    private TableView<?> tblDisplay;
+    private TableView<Baptism> tblDisplay;
     @FXML
-    private TableColumn<?, ?> colID;
+    private TableColumn<Baptism, Integer> colID;
     @FXML
-    private TableColumn<?, ?> colDateOfBirth;
+    private TableColumn<Baptism, String> colFullName;
     @FXML
-    private TableColumn<?, ?> colPlaceOfResidence;
+    private TableColumn<Baptism, String> colDateOfBirth;
     @FXML
-    private TableColumn<?, ?> colBaptismLocation;
+    private TableColumn<Baptism, String> colPlaceOfResidence;
     @FXML
-    private TableColumn<?, ?> colBaptiserName;
+    private TableColumn<Baptism, String> colBaptismLocation;
     @FXML
-    private TableColumn<?, ?> colMarriedTo;
+    private TableColumn<Baptism, String> colBaptiserName;
+    @FXML
+    private TableColumn<Baptism, String> colMarriedTo;
+    
+    @FXML
+    private TextField txtResidence;
+    @FXML
+    private TextField txtLocation;
+    @FXML
+    private TextField txtBaptised;
+    @FXML
+    private TextField txtMarried;
+    
     private Parent root;
     private Stage stage;
     private Scene scene;
-
+    @FXML
+    private TextField txtBaptisedBy;
+    @FXML
+    private TableColumn<?, ?> colDateOFBirth;
+    @FXML
+    private TableColumn<?, ?> colLocation;
+    @FXML
+    private TableColumn<?, ?> colBaptisedBy;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        // TODO
-    }    
+        loadTableData();
+    }
+
+    private void loadTableData()
+    {
+        Connection conn = DBConnection.getConnection();
+        ObservableList<Baptism> list = FXCollections.observableArrayList();
+        
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("full_name"));
+        colDateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birth_date"));
+        colPlaceOfResidence.setCellValueFactory(new PropertyValueFactory<>("residence"));
+        colBaptismLocation.setCellValueFactory(new PropertyValueFactory<>("baptism_location"));
+        colBaptiserName.setCellValueFactory(new PropertyValueFactory<>("baptism_location"));
+        colMarriedTo.setCellValueFactory(new PropertyValueFactory<>("married_to"));
+        
+        try
+        {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM baptism");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                list.add(new Baptism(rs.getInt("id"), rs.getString("full_name"), rs.getString("birth_date"), rs.getString("residence"), rs.getString("baptism_location"),
+                rs.getString("baptiser"), rs.getString("married_to")));
+            }
+            
+            // Setting table data
+            tblDisplay.setItems(list);
+            conn.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void saveDetails(ActionEvent event) 
@@ -72,13 +128,19 @@ public class BaptismController implements Initializable {
     @FXML
     private void clearDetails(ActionEvent event) 
     {
+        txtFullName.setText("");
+        txtResidence.setText("");
+        txtLocation.setText("");
+        txtBaptised.setText("");
+        txtMarried.setText("");
+        // dtpDateOfBirth
         
     }
 
     @FXML
     private void back(ActionEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/ParishRegisterLogin.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/Dashboard.fxml"));
         root = loader.load();
         
         // LoginController loginController = loader.getController();

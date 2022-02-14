@@ -29,13 +29,13 @@
                   <Label text="Date of Birth" />
                   <DatePicker fx:id="dtpDateOfBirth" prefHeight="35.0" prefWidth="314.0" promptText="Date of Birth" />
                   <Label layoutX="10.0" layoutY="27.0" text="Place of Residence" />
-                  <TextField layoutX="10.0" layoutY="44.0" prefHeight="35.0" promptText="Place of Residence" />
+                  <TextField fx:id="txtResidence" layoutX="10.0" layoutY="44.0" prefHeight="35.0" promptText="Place of Residence" />
                   <Label layoutX="10.0" layoutY="69.0" text="Baptism Location" />
-                  <TextField layoutX="10.0" layoutY="86.0" prefHeight="35.0" promptText="Baptism Location" />
+                  <TextField fx:id="txtLocation" layoutX="10.0" layoutY="86.0" prefHeight="35.0" promptText="Baptism Location" />
                   <Label layoutX="10.0" layoutY="111.0" text="Baptised By (Full Name)" />
-                  <TextField layoutX="10.0" layoutY="128.0" prefHeight="35.0" promptText="Baptised By" />
+                  <TextField fx:id="txtBaptisedBy" layoutX="10.0" layoutY="128.0" prefHeight="35.0" promptText="Baptised By" />
                   <Label layoutX="10.0" layoutY="153.0" text="Married to" />
-                  <TextField layoutX="10.0" layoutY="170.0" prefHeight="35.0" promptText="Married To" />
+                  <TextField fx:id="txtMarried" layoutX="10.0" layoutY="170.0" prefHeight="35.0" promptText="Married To" />
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveDetails" prefWidth="80.0" text="Save" />
@@ -53,12 +53,13 @@
          <children>
             <TableView fx:id="tblDisplay" layoutY="-1.0" prefHeight="598.0" prefWidth="768.0">
               <columns>
-                <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="colDateOfBirth" prefWidth="88.0" text="Date of Birth" />
+                <TableColumn fx:id="colID" prefWidth="33.0" text="ID" />
+                <TableColumn fx:id="colFullName" prefWidth="130.0" text="Full Name" />
+                  <TableColumn fx:id="colDateOFBirth" prefWidth="119.0" text="Date of birth" />
                   <TableColumn fx:id="colPlaceOfResidence" prefWidth="119.0" text="Place of Residence" />
-                  <TableColumn fx:id="colBaptismLocation" prefWidth="119.0" text="Baptism Location" />
-                  <TableColumn fx:id="colBaptiserName" prefWidth="119.0" text="Baptiser (Full Name)" />
-                  <TableColumn fx:id="colMarriedTo" prefWidth="247.0" text="Married To" />
+                  <TableColumn fx:id="colLocation" prefWidth="119.0" text="Baptism Location" />
+                  <TableColumn fx:id="colBaptisedBy" prefWidth="95.0" text="Baptised By" />
+                  <TableColumn fx:id="colMarriedTo" prefWidth="152.0" text="Married To" />
               </columns>
             </TableView>
          </children></AnchorPane>
