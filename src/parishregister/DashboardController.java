@@ -40,21 +40,22 @@ public class DashboardController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        // TODO
+        
     }    
 
     @FXML
-    private void addNewUser(ActionEvent user) throws IOException 
+    private void openFinancials(ActionEvent user) throws IOException 
     {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/AddNewUser.fxml"));
-//        root = loader.load();
-//        
-//        // LoginController loginController = loader.getController();
-//        stage = (Stage)((Node)user.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setTitle("Parish Register | Add New User");
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/Financials.fxml"));
+        root = loader.load();
+        
+        // LoginController loginController = loader.getController();
+        stage = (Stage)((Node)user.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Parish Register | Add New User");
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -69,6 +70,7 @@ public class DashboardController implements Initializable
         stage.setTitle("Parish Register | Confirmation Register");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -83,6 +85,7 @@ public class DashboardController implements Initializable
         stage.setTitle("Parish Register | Membership");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -97,6 +100,7 @@ public class DashboardController implements Initializable
         stage.setTitle("Parish Register | Marriage Register");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -108,9 +112,10 @@ public class DashboardController implements Initializable
         // LoginController loginController = loader.getController();
         stage = (Stage)((Node)baptism.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setTitle("Parish Register | Confirmation Register");
+        stage.setTitle("Parish Register | Baptism");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -122,9 +127,10 @@ public class DashboardController implements Initializable
         // LoginController loginController = loader.getController();
         stage = (Stage)((Node)deaths.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setTitle("Parish Register | Confirmation Register");
+        stage.setTitle("Parish Register | Deaths");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -140,5 +146,6 @@ public class DashboardController implements Initializable
         stage.setTitle("EquipTrack | Admin Dashboard");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 }

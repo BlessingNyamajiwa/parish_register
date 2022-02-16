@@ -1,14 +1,11 @@
 package parishregister;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import static parishregister.GenericMethods.errorBox;
-import static parishregister.GenericMethods.infoBox;
 
 public class ParishRegister extends Application 
 {
@@ -23,7 +20,9 @@ public class ParishRegister extends Application
         loginWindow.setScene(scene);
         loginWindow.setTitle("Parish Register | Login");
         loginWindow.setResizable(false);
+//        loginWindow.getIcons().add(new Image("bible.png"));
         loginWindow.show();
+        loginWindow.centerOnScreen();
     }
     
 //    private void checkConnection()

@@ -23,6 +23,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import static parishregister.GenericMethods.infoBox;
+import static parishregister.GenericMethods.warningBox;
 
 public class MarriageController implements Initializable 
 {
@@ -32,8 +34,6 @@ public class MarriageController implements Initializable
     private TextField txtGroomName;
     @FXML
     private TextField txtPlace;
-    @FXML
-    private DatePicker dtpMarriedDate;
     @FXML
     private TextField txtWitness1;
     @FXML
@@ -64,6 +64,8 @@ public class MarriageController implements Initializable
     private Parent root;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private TextField txtMarriedDate;
 
     /**
      * Initializes the controller class.
@@ -81,12 +83,12 @@ public class MarriageController implements Initializable
         
         // Setting cell value factories to populate table with database query result set
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colBridesName.setCellValueFactory(new PropertyValueFactory<>("bride"));
-        colGroomsName.setCellValueFactory(new PropertyValueFactory<>("grooms_name"));
+        colBridesName.setCellValueFactory(new PropertyValueFactory<>("bridesName"));
+        colGroomsName.setCellValueFactory(new PropertyValueFactory<>("groomsName"));
         colPlace.setCellValueFactory(new PropertyValueFactory<>("place"));
-        colMarried.setCellValueFactory(new PropertyValueFactory<>("married_date"));
-        colWitness1.setCellValueFactory(new PropertyValueFactory<>("witness1"));
-        colWitness2.setCellValueFactory(new PropertyValueFactory<>("witness2"));
+        colMarried.setCellValueFactory(new PropertyValueFactory<>("marriedDate"));
+        colWitness1.setCellValueFactory(new PropertyValueFactory<>("witnessOne"));
+        colWitness2.setCellValueFactory(new PropertyValueFactory<>("witnessTwo"));
         
         try
         {
@@ -112,19 +114,52 @@ public class MarriageController implements Initializable
     @FXML
     private void saveDetails(ActionEvent event) 
     {
-        
+        if(txtBrideName.equals("") || txtGroomName.equals("") || txtPlace.equals("") || txtWitness1.equals("") || txtWitness2.equals("") ||
+                txtMarriedDate.equals(""))
+        {
+            warningBox("Please fill in all fields","WARNING","Incomplete fields");
+        }
+        else
+        {
+            try
+            {
+                Connection conn = DBConnection.getConnection();
+                String sql = "INSERT INTO marriage(bride, grooms_name, place, married_date, witness1, witness2) VALUES (?,?,?,?,?,?)";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                
+                ps.setString(1, txtBrideName.getText());
+                ps.setString(2, txtGroomName.getText());
+                ps.setString(3, txtPlace.getText());
+                ps.setString(4, txtWitness1.getText());
+                ps.setString(5, txtWitness2.getText());
+                ps.setString(6, txtMarriedDate.getText());
+                
+                ps.execute();
+                infoBox("Registration entry has been updated successful", "SUCCESS", "Confrimation");
+                loadTableData();
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
     private void clearDetails(ActionEvent event) 
     {
-        
+        txtBrideName.setText("");
+        txtGroomName.setText("");
+        txtPlace.setText("");
+        txtWitness1.setText("");
+        txtWitness2.setText("");
+        txtMarriedDate.setText("");
     }
 
     @FXML
     private void btnDashboard(ActionEvent event) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/ConfirmationRegister.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/Dashboard.fxml"));
         root = loader.load();
         
         // LoginController loginController = loader.getController();
@@ -133,5 +168,6 @@ public class MarriageController implements Initializable
         stage.setTitle("EquipTrack | Admin Dashboard");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
 }

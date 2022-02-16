@@ -61,6 +61,8 @@ public class ParishRegisterLoginController implements Initializable
         }
     }
     
+    
+    
     public boolean createConnection(){
         try{
             conn = DriverManager.getConnection(DB_URL,"root","");
@@ -115,6 +117,7 @@ public class ParishRegisterLoginController implements Initializable
                     stage.setTitle("Parish Register | Login");
                     stage.setScene(scene);
                     stage.show();
+                    stage.centerOnScreen();
                 }
                 else
                 {

@@ -30,8 +30,6 @@ public class BaptismController implements Initializable
     @FXML
     private TextField txtFullName;
     @FXML
-    private DatePicker dtpDateOfBirth;
-    @FXML
     private Button btnSave;
     @FXML
     private Button btnClear;
@@ -58,7 +56,6 @@ public class BaptismController implements Initializable
     private TextField txtResidence;
     @FXML
     private TextField txtLocation;
-    @FXML
     private TextField txtBaptised;
     @FXML
     private TextField txtMarried;
@@ -69,11 +66,9 @@ public class BaptismController implements Initializable
     @FXML
     private TextField txtBaptisedBy;
     @FXML
-    private TableColumn<?, ?> colDateOFBirth;
-    @FXML
-    private TableColumn<?, ?> colLocation;
-    @FXML
-    private TableColumn<?, ?> colBaptisedBy;
+    private TextField txtDateOfBirth;
+    
+    public String id = null;
     
     /**
      * Initializes the controller class.
@@ -90,12 +85,12 @@ public class BaptismController implements Initializable
         ObservableList<Baptism> list = FXCollections.observableArrayList();
         
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colFullName.setCellValueFactory(new PropertyValueFactory<>("full_name"));
-        colDateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birth_date"));
-        colPlaceOfResidence.setCellValueFactory(new PropertyValueFactory<>("residence"));
-        colBaptismLocation.setCellValueFactory(new PropertyValueFactory<>("baptism_location"));
-        colBaptiserName.setCellValueFactory(new PropertyValueFactory<>("baptism_location"));
-        colMarriedTo.setCellValueFactory(new PropertyValueFactory<>("married_to"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        colDateOfBirth.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+        colPlaceOfResidence.setCellValueFactory(new PropertyValueFactory<>("place"));
+        colBaptismLocation.setCellValueFactory(new PropertyValueFactory<>("baptismLocation"));
+        colBaptiserName.setCellValueFactory(new PropertyValueFactory<>("baptisor"));
+        colMarriedTo.setCellValueFactory(new PropertyValueFactory<>("marriedTo"));
         
         try
         {
@@ -104,7 +99,8 @@ public class BaptismController implements Initializable
             
             while(rs.next())
             {
-                list.add(new Baptism(rs.getInt("id"), rs.getString("full_name"), rs.getString("birth_date"), rs.getString("residence"), rs.getString("baptism_location"),
+                list.add(new Baptism(rs.getInt("id"), rs.getString("full_name"), rs.getString("birth_date"), 
+                        rs.getString("residence"), rs.getString("baptism_location"),
                 rs.getString("baptiser"), rs.getString("married_to")));
             }
             
@@ -149,6 +145,7 @@ public class BaptismController implements Initializable
         stage.setTitle("EquipTrack | Admin Dashboard");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
     
 }

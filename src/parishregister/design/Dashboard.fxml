@@ -6,22 +6,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parishregister.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parishregister.DashboardController">
    <children>
       <VBox id="vbContainer" alignment="CENTER" prefHeight="450.0" prefWidth="600.0" spacing="5.0" stylesheets="@../css/dashboard.css">
          <children>
-            <Label text="Choose an operation below...">
+            <Label text="Choose an operation below..." textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnAddNewUser" mnemonicParsing="false" onAction="#addNewUser" prefHeight="50.0" prefWidth="500.0" text="Add New User" />
-            <Button fx:id="btnConfirmationReg" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#confirmRegistration" prefHeight="50.0" prefWidth="500.0" text="Confirmation Register" />
-            <Button fx:id="btnMembership" layoutX="10.0" layoutY="95.0" mnemonicParsing="false" onAction="#checkMembers" prefHeight="50.0" prefWidth="500.0" text="Membership" />
-            <Button fx:id="btnMarriage" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#viewMarriages" prefHeight="50.0" prefWidth="500.0" text="Marriage" />
-            <Button fx:id="btnBaptism" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#viewBaptism" prefHeight="50.0" prefWidth="500.0" text="Baptism" />
-            <Button fx:id="btnDeaths" layoutX="10.0" layoutY="245.0" mnemonicParsing="false" onAction="#viewDeaths" prefHeight="50.0" prefWidth="500.0" text="Deaths" />
-            <Button fx:id="btnLogout" layoutX="10.0" layoutY="295.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="500.0" text="Logout" />
+            <Button fx:id="btnAddNewUser" mnemonicParsing="false" onAction="#openFinancials" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Financials" />
+            <Button fx:id="btnConfirmationReg" layoutX="10.0" layoutY="45.0" mnemonicParsing="false" onAction="#confirmRegistration" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Confirmation Register" />
+            <Button fx:id="btnMembership" layoutX="10.0" layoutY="95.0" mnemonicParsing="false" onAction="#checkMembers" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Membership" />
+            <Button fx:id="btnMarriage" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#viewMarriages" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Marriage" />
+            <Button fx:id="btnBaptism" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#viewBaptism" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Baptism" />
+            <Button fx:id="btnDeaths" layoutX="10.0" layoutY="245.0" mnemonicParsing="false" onAction="#viewDeaths" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Deaths" />
+            <Button fx:id="btnLogout" layoutX="10.0" layoutY="295.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Logout" />
          </children>
       </VBox>
    </children>

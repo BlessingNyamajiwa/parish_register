@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +27,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.swing.event.ChangeListener;
+import static parishregister.GenericMethods.infoBox;
 import static parishregister.GenericMethods.warningBox;
 
 /**
@@ -44,18 +49,6 @@ public class MembershipController implements Initializable
     private TextField txtHome;
     @FXML
     private TextField txtSpouse;
-    @FXML
-    private RadioButton rdbBaptisedYes;
-    @FXML
-    private ToggleGroup baptised;
-    @FXML
-    private RadioButton rdbBaptiseddNo;
-    @FXML
-    private RadioButton rdbMarriedYes;
-    @FXML
-    private ToggleGroup married;
-    @FXML
-    private RadioButton rdbMarriedNo;
     @FXML
     private TextField txtChildren;
     @FXML
@@ -83,13 +76,17 @@ public class MembershipController implements Initializable
     @FXML
     private TableColumn<Membership, String> colMarried;
     @FXML
-    private TableColumn<Membership, Integer> colChildren;
+    private TableColumn<Membership, String> colChildren;
     
     // private ObservableList data;
     
     private Parent root;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private TextField txtBaptised;
+    @FXML
+    private TextField txtMarried;
 
     /**
      * Initializes the controller class.
@@ -104,14 +101,44 @@ public class MembershipController implements Initializable
     private void saveDetails(ActionEvent event) 
     {
         if(txtDiocese.getText().equals("") || txtParish.getText().equals("") || txtPlace.getText().equals("") || txtHome.getText().equals("") || 
-                txtSpouse.getText().equals("") || baptised.getSelectedToggle().equals(false) || married.getSelectedToggle().equals(false) ||
+                txtSpouse.getText().equals("")||
                 txtChildren.getText().equals(""))
         {
             warningBox("Please fill in all fields","WARNING","Incomplete fields");
         }
         else
         {
-            Connection conn = DBConnection.getConnection();
+//            String diocese = txtDiocese.getText();
+//            String parish = txtParish.getText();
+//            String place = txtPlace.getText();
+//            String home = txtHome.getText();
+//            String spouse = txtSpouse.getText();
+//            String marital = married.getSelectedToggle().toString();
+//            String baptism = baptised.getSelectedToggle().toString();
+//            String kids = txtChildren.getText();
+            try 
+            {
+                Connection conn = DBConnection.getConnection();
+                String sql = "INSERT INTO membership(diocese, parish, place, home, spouse, baptised, married, children) VALUES (?,?,?,?,?,?,?,?)";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, txtDiocese.getText());
+                ps.setString(2, txtParish.getText());
+                ps.setString(3, txtPlace.getText());
+                ps.setString(4, txtHome.getText());
+                ps.setString(5, txtSpouse.getText());
+                ps.setString(6, txtBaptised.getText());
+                ps.setString(7, txtMarried.getText());
+                ps.setString(8, txtChildren.getText());
+                
+                ps.execute();
+                infoBox("Registration entry has been updated successful", "SUCCESS", "Confrimation");
+                loadTableData();
+            } 
+            
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -123,6 +150,9 @@ public class MembershipController implements Initializable
         txtPlace.setText("");
         txtHome.setText("");
         txtChildren.setText("");
+        txtSpouse.setText("");
+        txtMarried.setText("");
+        txtBaptised.setText("");
     }
 
     @FXML
@@ -137,6 +167,7 @@ public class MembershipController implements Initializable
         stage.setTitle("EquipTrack | Admin Dashboard");
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
     }
     
     private void loadTableData()
@@ -153,7 +184,7 @@ public class MembershipController implements Initializable
         colSpouse.setCellValueFactory(new PropertyValueFactory<>("spouse"));
         colBaptised.setCellValueFactory(new PropertyValueFactory<>("baptised"));
         colMarried.setCellValueFactory(new PropertyValueFactory<>("married"));
-        colChildren.setCellValueFactory(new PropertyValueFactory<>("children"));
+        colChildren.setCellValueFactory(new PropertyValueFactory<>("numberOfChildren"));
         
         try
         {
