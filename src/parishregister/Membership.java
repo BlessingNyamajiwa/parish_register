@@ -4,10 +4,9 @@ package parishregister;
 public class Membership 
 {
     private int id;
-    private String diocese, parish, place, home, spouse, baptised, married;
-    private int numberOfChildren;
+    private String diocese, parish, place, home, spouse, baptised, married, numberOfChildren;
 
-    public Membership(int id, String diocese, String parish, String place, String home, String spouse, String baptised, String married, int numberOfChildren) {
+    public Membership(int id, String diocese, String parish, String place, String home, String spouse, String baptised, String married, String numberOfChildren) {
         this.id = id;
         this.diocese = diocese;
         this.parish = parish;
@@ -89,12 +88,12 @@ public class Membership
         this.married = married;
     }
 
-    public int getNumberOfChildren() 
+    public String getNumberOfChildren() 
     {
         return numberOfChildren;
     }
 
-    public void setNumberOfChildren(int numberOfChildren) 
+    public void setNumberOfChildren(String numberOfChildren) 
     {
         this.numberOfChildren = numberOfChildren;
     }

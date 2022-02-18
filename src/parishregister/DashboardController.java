@@ -18,8 +18,6 @@ import static parishregister.GenericMethods.confirmBox;
 public class DashboardController implements Initializable 
 {
     @FXML
-    private Button btnAddNewUser;
-    @FXML
     private Button btnConfirmationReg;
     @FXML
     private Button btnMembership;
@@ -34,6 +32,10 @@ public class DashboardController implements Initializable
     private Parent root;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private Button btnFinancials;
+    @FXML
+    private Button btnSearch;
     /**
      * Initializes the controller class.
      */
@@ -143,7 +145,22 @@ public class DashboardController implements Initializable
         // LoginController loginController = loader.getController();
         stage = (Stage)((Node)signoff.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setTitle("EquipTrack | Admin Dashboard");
+        stage.setTitle("Parish Register | Admin Dashboard");
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+    }
+
+    @FXML
+    private void searchSpecific(ActionEvent search) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("design/Search.fxml"));
+        root = loader.load();
+        
+        // LoginController loginController = loader.getController();
+        stage = (Stage)((Node)search.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Parish Register | Search");
         stage.setScene(scene);
         stage.show();
         stage.centerOnScreen();

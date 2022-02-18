@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parishregister.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="parishregister.DashboardController">
    <children>
-      <VBox id="vbContainer" alignment="CENTER" prefHeight="500.0" prefWidth="600.0" spacing="5.0" stylesheets="@../css/dashboard.css">
+      <VBox id="vbContainer" alignment="CENTER" prefHeight="450.0" prefWidth="600.0" spacing="5.0" stylesheets="@../css/dashboard.css">
          <children>
             <Label text="Choose an operation below..." textFill="WHITE">
                <font>
@@ -27,7 +27,6 @@
             <Button fx:id="btnBaptism" layoutX="10.0" layoutY="195.0" mnemonicParsing="false" onAction="#viewBaptism" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Baptism" />
             <Button fx:id="btnDeaths" layoutX="10.0" layoutY="245.0" mnemonicParsing="false" onAction="#viewDeaths" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Deaths" />
             <Button fx:id="btnLogout" layoutX="10.0" layoutY="295.0" mnemonicParsing="false" onAction="#logout" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Logout" />
-            <Button fx:id="btnSearch" layoutX="60.0" layoutY="393.0" mnemonicParsing="false" onAction="#searchSpecific" prefHeight="50.0" prefWidth="500.0" styleClass="btn" text="Query..." />
          </children>
       </VBox>
    </children>
